@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/rmq-exchange/src",
+  "compilerOptions": {
+    "deleteOutDir": true,
+    "webpack": true,
+    "tsConfigPath": "apps/rmq-exchange/tsconfig.app.json"
+  },
+  "monorepo": true,
+  "root": "apps/rmq-exchange",
+  "projects": {
+    "rmq-exchange": {
+      "type": "application",
+      "root": "apps/rmq-exchange",
+      "entryFile": "main",
+      "sourceRoot": "apps/rmq-exchange/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rmq-exchange/tsconfig.app.json"
+      }
+    },
+    "producer": {
+      "type": "application",
+      "root": "apps/producer",
+      "entryFile": "main",
+      "sourceRoot": "apps/producer/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/producer/tsconfig.app.json"
+      }
+    },
+    "consumer": {
+      "type": "application",
+      "root": "apps/consumer",
+      "entryFile": "main",
+      "sourceRoot": "apps/consumer/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/consumer/tsconfig.app.json"
+      }
+    }
+  }
+}

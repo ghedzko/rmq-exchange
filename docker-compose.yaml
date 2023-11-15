@@ -1,0 +1,51 @@
+services:
+  producer:
+    build:
+      context: .
+      dockerfile: ./apps/producer/Dockerfile
+      target: development
+    command: pnpm run start:dev notifications
+    env_file:
+      - ./apps/producer/.env
+    ports:
+      - '9001:9001'
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - backend
+    depends_on:
+      - rabbitmq
+  consumer:
+    build:
+      context: .
+      dockerfile: ./apps/consumer/Dockerfile
+      target: development
+    command: pnpm run start:dev consumer
+    env_file:
+      - ./apps/consumer/.env
+    ports:
+      - '9002:9002'
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - backend
+    depends_on:
+      - rabbitmq
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: on-failure
+    container_name: rabbitmq
+    hostname: rabbitmq
+    volumes:
+      - rabbit_data:/var/lib/rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - backend
+networks:
+  backend:
+    driver: bridge
+volumes:
+  rabbit_data:
+    driver: local

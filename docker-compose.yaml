@@ -34,7 +34,7 @@ services:
   rabbitmq:
     image: rabbitmq:3-management
     restart: on-failure
-    container_name: rabbitmq
+    container_name: rmq
     hostname: rabbitmq
     volumes:
       - rabbit_data:/var/lib/rabbitmq

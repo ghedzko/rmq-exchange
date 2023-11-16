@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: ./apps/producer/Dockerfile
       target: development
-    command: pnpm run start:dev notifications
+    command: pnpm run start:dev producer
     env_file:
       - ./apps/producer/.env
     ports:

@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ProducerService } from './producer.service';
 
-@Controller()
+@Controller('producer')
 export class ProducerController {
   constructor(private readonly producerService: ProducerService) {}
 

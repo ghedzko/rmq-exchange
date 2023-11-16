@@ -1,8 +1,15 @@
+import { AmqpConnection } from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class ProducerService {
-  getHello(): string {
-    return 'Hello World!';
+  constructor(readonly amqpConnection: AmqpConnection) {}
+  async getHello(message: string) {
+    await this.amqpConnection.request({
+      exchange: 'plus',
+      routingKey: 'test-route',
+      payload: { message: message },
+    });
+    return message;
   }
 }

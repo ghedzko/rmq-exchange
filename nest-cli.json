@@ -45,6 +45,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/common/tsconfig.lib.json"
       }
+    },
+    "consumer2": {
+      "type": "application",
+      "root": "apps/consumer2",
+      "entryFile": "main",
+      "sourceRoot": "apps/consumer2/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/consumer2/tsconfig.app.json"
+      }
     }
   }
 }

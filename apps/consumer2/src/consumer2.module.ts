@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ProducerController } from './producer.controller';
-import { ProducerService } from './producer.service';
+import { Consumer2Controller } from './consumer2.controller';
+import { Consumer2Service } from './consumer2.service';
 import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
 
 @Module({
@@ -13,9 +13,10 @@ import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
         },
       ],
       uri: 'amqp://rabbitmq:5672',
+      enableControllerDiscovery: true,
     }),
   ],
-  controllers: [ProducerController],
-  providers: [ProducerService],
+  controllers: [Consumer2Controller],
+  providers: [Consumer2Service],
 })
-export class ProducerModule {}
+export class Consumer2Module {}

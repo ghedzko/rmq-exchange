@@ -31,6 +31,22 @@ services:
       - backend
     depends_on:
       - rabbitmq
+  consumer2:
+    build:
+      context: .
+      dockerfile: ./apps/consumer2/Dockerfile
+      target: development
+    command: pnpm run start:dev consumer2
+    env_file:
+      - ./apps/consumer2/.env
+    ports:
+      - '9003:9003'
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - backend
+    depends_on:
+      - rabbitmq
   rabbitmq:
     image: rabbitmq:3-management
     restart: on-failure

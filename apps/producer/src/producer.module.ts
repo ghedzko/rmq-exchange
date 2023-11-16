@@ -1,20 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ProducerController } from './producer.controller';
 import { ProducerService } from './producer.service';
-import { RabbitMQModule } from '@golevelup/nestjs-rabbitmq';
+import { RmqModule } from 'libs/common/rmq/rqm.module';
 
 @Module({
-  imports: [
-    RabbitMQModule.forRoot(RabbitMQModule, {
-      exchanges: [
-        {
-          name: 'plus',
-          type: 'fanout',
-        },
-      ],
-      uri: 'amqp://rabbitmq:5672',
-    }),
-  ],
+  imports: [RmqModule],
   controllers: [ProducerController],
   providers: [ProducerService],
 })

@@ -12,4 +12,12 @@ export class ProducerService {
     });
     return message;
   }
+  async getHello2(message: string) {
+    await this.amqpConnection.request({
+      exchange: 'plus',
+      routingKey: 'otro-msg',
+      payload: { message: message },
+    });
+    return message;
+  }
 }

@@ -1,4 +1,7 @@
-import { Nack, RabbitRPC } from '@golevelup/nestjs-rabbitmq';
+import {
+  MessageHandlerErrorBehavior,
+  RabbitRPC,
+} from '@golevelup/nestjs-rabbitmq';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -10,15 +13,11 @@ export class ConsumerService {
     exchange: 'plus',
     routingKey: 'test-route',
     queue: 'consumer1-queue',
+    errorBehavior: MessageHandlerErrorBehavior.ACK,
+    errorHandler: (error) => console.log('error handler:', error),
   })
   public async rpcHandler({ message }: { message: string }) {
-    try {
-      if (message === 'new-error') throw new Error(message);
-
-      console.log(message);
-    } catch (error) {
-      console.log('hubo un error', error);
-      return new Nack(true);
-    }
+    if (message === 'new-error') throw new Error(message);
+    console.log(message);
   }
 }

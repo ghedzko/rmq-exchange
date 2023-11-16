@@ -12,6 +12,15 @@ export class Consumer2Service {
     queue: 'consumer2-queue',
   })
   public async rpcHandler({ message }: { message: string }) {
-    console.log(message);
+    console.log(message, 'esto es rpchandler1');
+  }
+
+  @RabbitRPC({
+    exchange: 'plus',
+    routingKey: 'otro-msg',
+    queue: 'consumer2-queue',
+  })
+  public async rpcHandler2({ message }: { message: string }) {
+    console.log(message, 'esto es rpchandler2');
   }
 }

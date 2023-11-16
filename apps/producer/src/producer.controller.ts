@@ -9,4 +9,8 @@ export class ProducerController {
   async getHello(@Query('message') message: string) {
     return await this.producerService.getHello(message);
   }
+  @Get('otro')
+  async getHello2(@Query('message') message: string) {
+    return await this.producerService.getHello2(message);
+  }
 }
